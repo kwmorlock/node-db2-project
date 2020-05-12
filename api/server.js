@@ -1,6 +1,8 @@
+const express = require("express");
 const server = express();
 const carRouter = require("../router/carsRouter");
 const helmet = require("helmet");
+
 
 server.use(helmet());
 
@@ -11,7 +13,7 @@ server.use("/api/cars", carRouter );
 
 
 server.get('/', (req, res) => {
-  res.send(`<h2>Let's write some middleware!</h2>`);
+  res.send(`<h2>Let's write some functioning middleware!</h2>`);
 });
 
 
