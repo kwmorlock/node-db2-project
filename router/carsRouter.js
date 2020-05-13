@@ -46,6 +46,44 @@ router.get("/", (req, res) => {
   });
 
 
+  router.put("/:id", (req, res) => {
+    const changes = req.body;
+  
+    db("cars")
+      .where({ id: req.params.id })
+      .update(changes)
+      .then(count => {
+        if (count > 0) {
+          res.status(200).json({ data: count });
+        } else {
+          res.status(404).json({ message: "record not found by that Id" });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ message: error.messsage });
+      });
+  });
+
+  router.delete("/:id", (req, res) => {
+    db("cars")
+      .where({ id: req.params.id })
+      .del()
+      .then(count => {
+        if (count > 0) {
+          res.status(200).json({ data: count });
+        } else {
+          res.status(404).json({ message: "record not found by that Id" });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ message: error.messsage });
+      });
+  });
+
+
+
 module.exports = router;
 
 
